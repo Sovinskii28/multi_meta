@@ -1,8 +1,8 @@
 let socket;
 
 export function setupSocket(myID, onMessageReceived) {
-    // Подключаемся к серверу
-    socket = new WebSocket(`ws://${window.location.hostname}:3000/ws`);
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    socket = new WebSocket(`${protocol}//${window.location.host}/ws`);
 
     socket.onopen = () => {
         console.log("Соединение установлено");

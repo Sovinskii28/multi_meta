@@ -1,6 +1,6 @@
 export class Auth {
     constructor() {
-        this.baseUrl = `http://${window.location.hostname}:3000/api`;
+        this.baseUrl = `${window.location.protocol}//${window.location.host}/api`;
         this.token = localStorage.getItem('auth_token');
         this.userData = JSON.parse(localStorage.getItem('user_data')) || null;
     }
