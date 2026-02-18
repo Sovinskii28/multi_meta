@@ -1,8 +1,21 @@
 let socket;
 
 export function setupSocket(myID, onMessageReceived) {
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    socket = new WebSocket(`${protocol}//${window.location.host}/ws`);
+    // Если используете ngrok, укажите домен здесь (без http://)
+    const externalHost = null;
+
+    const host = externalHost || window.location.host;
+    let protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+
+    // Если используем туннель, принудительно ставим wss (безопасное соединение)
+    if (externalHost) protocol = 'wss:';
+
+    let finalHost = host;
+    if (finalHost.includes('localhost') && !finalHost.includes(':3000')) {
+        finalHost = 'localhost:3000';
+    }
+
+    socket = new WebSocket(`${protocol}//${finalHost}/ws`);
 
     socket.onopen = () => {
         console.log("Соединение установлено");

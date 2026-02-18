@@ -1,6 +1,17 @@
 export class Auth {
     constructor() {
-        this.baseUrl = `${window.location.protocol}//${window.location.host}/api`;
+        // Если вы запустили ngrok, вставьте ссылку сюда. 
+        // Если оставить null, будет использоваться текущий хост (для локальной разработки).
+        this.externalBackendUrl = null;
+
+        const host = this.externalBackendUrl || window.location.host;
+        const protocol = this.externalBackendUrl ? 'https:' : window.location.protocol;
+
+        this.baseUrl = `${protocol}//${host}/api`;
+        if (this.baseUrl.includes('localhost') && !this.baseUrl.includes(':3000')) {
+            this.baseUrl = `http://localhost:3000/api`;
+        }
+
         this.token = localStorage.getItem('auth_token');
         this.userData = JSON.parse(localStorage.getItem('user_data')) || null;
     }
