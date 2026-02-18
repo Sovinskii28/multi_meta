@@ -13,16 +13,15 @@ export function setupSocket(myID, onMessageReceived) {
     socket.onmessage = (event) => {
         try {
             const data = JSON.parse(event.data);
-            // Передаем данные в main.js
-            if (onMessageReceived) onMessageReceived(data); 
+            if (onMessageReceived) onMessageReceived(data);
         } catch (e) {
             console.error("Ошибка парсинга сообщения:", e);
         }
     };
 }
 
-export function sendMove(id, x, z) {
+export function sendMove(id, x, z, ry, action = null, type = 'move', text = null) {
     if (socket && socket.readyState === WebSocket.OPEN) {
-        socket.send(JSON.stringify({ type: 'move', id, x, z }));
+        socket.send(JSON.stringify({ type, id, x, z, ry, action, text }));
     }
 }

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>MetaSoc</title>
-    <style>body { margin: 0; }</style>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
-<script type="importmap">
+    <script type="importmap">
     { 
         "imports": { 
             "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
@@ -14,6 +16,29 @@
         } 
     }
 </script>
+    <div id="auth-overlay" class="auth-overlay">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>METASOC</h1>
+                <p>Войдите в свой аккаунт, чтобы продолжить</p>
+            </div>
+            <div id="auth-error" class="auth-error">Неверный логин или пароль</div>
+            <form id="auth-form" class="auth-form">
+                <div class="input-group">
+                    <label for="login">Логин</label>
+                    <input type="text" id="login" class="auth-input" placeholder="Введите ваш логин" required
+                        autocomplete="username">
+                </div>
+                <div class="input-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" class="auth-input" placeholder="••••••••" required
+                        autocomplete="current-password">
+                </div>
+                <button type="submit" id="login-button" class="auth-button">Войти в мир</button>
+            </form>
+        </div>
+    </div>
     <script type="module" src="./js/main.js"></script>
 </body>
+
 </html>
